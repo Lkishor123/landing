@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Secure AI Era - Confidential & Quantum Computing</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+  />
+
+  <!-- Bootstrap Icons (optional, for icon usage) -->
+  <link 
+    rel="stylesheet" 
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  />
+
+  <style>
+    /************************************************************
+      Color Theme and Basic Resets
+    *************************************************************/
+    :root {
+      --primary-blue: #0d6efd;   /* Bootstrap primary color */
+      --light-grey: #f8f9fa;
+      --med-grey: #e9ecef;
+      --dark-grey: #6c757d;
+      --white: #ffffff;
+    }
+
+    body {
+      background-color: var(--light-grey);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /************************************************************
+      Navbar
+    *************************************************************/
+    .navbar {
+      background-color: var(--primary-blue);
+    }
+
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+    }
+
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+    }
+
+    /************************************************************
+      Hero Section
+    *************************************************************/
+    .hero-section {
+      position: relative;
+      min-height: 70vh;
+      background: url('https://source.unsplash.com/1600x900/?artificial-intelligence,technology') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      padding: 4rem 1rem;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .hero-btn {
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /************************************************************
+      Section Headings
+    *************************************************************/
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    /************************************************************
+      Horizontal Card Deck & Card Styles
+    *************************************************************/
+    .card-deck-container {
+      position: relative;
+    }
+
+    /* We use flex for horizontal scrolling; wrap on smaller screens. */
+    .horizontal-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      scroll-behavior: smooth;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      transition: transform 0.2s ease-out;
+    }
+
+    /* On very narrow screens, allow wrapping to avoid overflow issues. */
+    @media (max-width: 768px) {
+      .horizontal-scroll {
+        flex-wrap: wrap;
+      }
+    }
+
+    .card-custom {
+      min-width: 280px;
+      max-width: 320px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.4); /* Translucent border */
+      background-color: var(--white);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      /* Fade-in animation */
+      animation: fadeInUp 0.8s ease-in-out;
+    }
+
+    .card-custom:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Simple fade-up effect for cards */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    /* Optional arrow buttons for manual scrolling (comment out if not needed) */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      border-radius: 50%;
+      color: var(--white);
+      background-color: rgba(0,0,0,0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .arrow-btn:hover {
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .arrow-left {
+      left: 0;
+      margin-left: 0.5rem;
+    }
+
+    .arrow-right {
+      right: 0;
+      margin-right: 0.5rem;
+    }
+
+    /************************************************************
+      Sections with Images
+    *************************************************************/
+    .section-image {
+      max-height: 400px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /************************************************************
+      Footer
+    *************************************************************/
+    footer {
+      background-color: var(--primary-blue);
+      color: var(--white);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">AccelCQ</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-center" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#confidential">Confidential</a></li>
+          <li class="nav-item"><a class="nav-link" href="#quantum">Quantum</a></li>
+          <li class="nav-item"><a class="nav-link" href="#randd">R&D</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="#industries">Industries</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Accelerate AI with Secure Infrastructure</h1>
+      <p class="hero-subtitle">
+        We specialize in Confidential &amp; Quantum Computing solutions, ensuring data protection 
+        and advanced computation for the AI era.
+      </p>
+      <a href="#confidential" class="btn btn-light btn-lg hero-btn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Confidential Computing Section -->
+  <section id="confidential" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="section-heading">Confidential Computing</h2>
+      <p class="text-center mb-5">
+        Protect data-in-use through Trusted Execution Environments (TEEs). 
+        Leverage secure enclaves to ensure compliance, privacy, and risk mitigation in AI workflows.
+      </p>
+
+      <!-- Horizontal Card Deck -->
+      <div class="card-deck-container position-relative">
+        <!-- (Optional) Manual Arrow Buttons -->
+        <button class="arrow-btn arrow-left" onclick="scrollLeft('confidential-scroll')">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <div class="horizontal-scroll" id="confidential-scroll">
+          <!-- Card 1 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/cc-consulting.jpg" 
+              class="card-img-top" 
+              alt="Consulting & Advisory" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Consulting & Advisory</h5>
+              <p class="card-text">
+                Strategy & compliance planning, including GDPR & HIPAA for AI-centric workloads.
+              </p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/cc-implementation.jpg"
+              class="card-img-top" 
+              alt="Implementation & Integration" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Implementation & Integration</h5>
+              <p class="card-text">
+                Set up and migrate workloads to TEEs such as Intel SGX, AMD SEV, and ARM TrustZone.
+              </p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/cc-managed.jpg"
+            class="card-img-top" 
+              alt="Managed Services" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Managed Services</h5>
+              <p class="card-text">
+                Confidential Computing as a Service (CCaaS), continuous monitoring & secure key management.
+              </p>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/cc-audit.jpg"
+            class="card-img-top" 
+              alt="Security Audits & Testing" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Security Audits & Testing</h5>
+              <p class="card-text">
+                Regular penetration testing and TEE security configuration audits for AI pipelines.
+              </p>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/cc-training.jpg"
+            class="card-img-top" 
+              alt="Training & Workshops" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Training & Workshops</h5>
+              <p class="card-text">
+                Hands-on knowledge transfer on TEE secure coding, best practices, and certifications.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button class="arrow-btn arrow-right" onclick="scrollRight('confidential-scroll')">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quantum Computing Section -->
+  <section id="quantum" class="py-5" style="background-color: var(--med-grey);">
+    <div class="container">
+      <h2 class="section-heading">Quantum Computing</h2>
+      <p class="text-center mb-5">
+        Harness the power of quantum for optimization, advanced analytics, and post-quantum security. 
+        Transform your AI capabilities with next-gen computation.
+      </p>
+
+      <!-- Horizontal Card Deck -->
+      <div class="card-deck-container position-relative">
+        <button class="arrow-btn arrow-left" onclick="scrollLeft('quantum-scroll')">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <div class="horizontal-scroll" id="quantum-scroll">
+          <!-- Card 1 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/qc-abstract.jpg"
+            class="card-img-top" 
+              alt="Advisory & Readiness" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Advisory & Readiness</h5>
+              <p class="card-text">
+                Quantum readiness assessments, risk analysis, and enterprise integration strategies.
+              </p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/qc-algo.jpg"
+            class="card-img-top" 
+              alt="Algorithm Design" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Algorithm Design</h5>
+              <p class="card-text">
+                Optimization, quantum-assisted ML, and cryptography solutions tailored to your domain.
+              </p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/qc-integration.jpg"
+            class="card-img-top" 
+              alt="Infrastructure Integration" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Infrastructure Integration</h5>
+              <p class="card-text">
+                Set up hybrid quantum-classical systems and connect to cloud-based quantum services.
+              </p>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/qc-managed.jpg"
+            class="card-img-top" 
+              alt="Managed Quantum (QCaaS)" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Managed Quantum (QCaaS)</h5>
+              <p class="card-text">
+                On-demand quantum resources, experimentation, and continuous support for AI use-cases.
+              </p>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="card card-custom shadow">
+            <img 
+            src="artifact/qc-security.jpg"
+            class="card-img-top" 
+              alt="Post-Quantum Security" 
+            />
+            <div class="card-body">
+              <h5 class="card-title fw-bold">Post-Quantum Security</h5>
+              <p class="card-text">
+                Transition to quantum-safe encryption and protect against future quantum threats.
+              </p>
+            </div>
+          </div>
+        </div>
+        <button class="arrow-btn arrow-right" onclick="scrollRight('quantum-scroll')">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- R&D & Innovation -->
+  <section id="randd" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="section-heading">R&D & Innovation</h2>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto;">
+        Collaborate on Proof-of-Concept projects, explore new algorithms, and drive breakthroughs 
+        in secure AI technology using Confidential & Quantum Computing.
+      </p>
+      <div class="text-center mt-4">
+        <img 
+        src="artifact/innovation-lab.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="R&D & Innovation" 
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources -->
+  <section id="resources" class="py-5" style="background-color: var(--med-grey);">
+    <div class="container">
+      <h2 class="section-heading">Resources & Thought Leadership</h2>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto;">
+        Stay informed with our articles, case studies, webinars, and white papers to learn 
+        about the latest developments in secure AI infrastructure.
+      </p>
+      <div class="text-center mt-4">
+        <img 
+        src="artifact/resources-library.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="Resources" 
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section id="industries" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="section-heading">Industries</h2>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto;">
+        Leveraging Confidential & Quantum Computing across Healthcare, Finance, Government, 
+        Manufacturing, and Energy for secure data processing and advanced analytics.
+      </p>
+      <div class="text-center mt-4">
+        <img 
+        src="artifact/industries-business.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="Industries" 
+        />
+        <img 
+        src="artifact/qc-integration.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="Industries" 
+        />
+        <img 
+        src="artifact/cc-consulting.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="Industries" 
+        />
+        <img 
+        src="artifact/qc-security.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="Industries" 
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="py-5" style="background-color: var(--med-grey);">
+    <div class="container">
+      <h2 class="section-heading">About Us</h2>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto;">
+        Our mission is to accelerate the development, deployment, and adoption of secure, 
+        next-generation AI infrastructures. We partner with leading hardware, cloud providers, 
+        and research institutions to bring cutting-edge solutions to market.
+      </p>
+      <div class="text-center mt-4">
+        <img 
+        src="artifact/about-team.jpg"
+        class="img-fluid rounded shadow section-image" 
+          alt="About Us" 
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-5 bg-white">
+    <div class="container">
+      <h2 class="section-heading">Contact</h2>
+      <p class="text-center" style="max-width: 800px; margin: 0 auto;">
+        Ready to explore Confidential or Quantum Computing for your AI initiatives?  
+        Get in touch for an assessment, demo, or partnership opportunity.
+      </p>
+      <div class="mx-auto mt-4" style="max-width: 500px;">
+        <form>
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              class="form-control" 
+              placeholder="John Doe"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-control" 
+              placeholder="john@example.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message:</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              class="form-control" 
+              rows="4" 
+              placeholder="How can we help?"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary fw-bold">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="mb-0">&copy; 2025 AccelCQ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle + Popper -->
+  <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <script>
+    /************************************************************
+     * 1. Manual Scroll Buttons
+     ************************************************************/
+    function scrollLeft(containerId) {
+      const container = document.getElementById(containerId);
+      container.scrollBy({ top: 0, left: -300, behavior: 'smooth' });
+    }
+
+    function scrollRight(containerId) {
+      const container = document.getElementById(containerId);
+      container.scrollBy({ top: 0, left: 300, behavior: 'smooth' });
+    }
+
+    /************************************************************
+     * 2. Auto Horizontal Scroll on Page Scroll
+     *    - As user scrolls down the page, the card decks will
+     *      scroll horizontally based on the page's scrollY.
+     *    - This is a simple demo; you might want to optimize
+     *      or use Intersection Observer in a real application.
+     ************************************************************/
+    const decks = [];
+
+    // Initialize references to our horizontal decks
+    window.addEventListener('DOMContentLoaded', () => {
+      decks.push(document.getElementById('confidential-scroll'));
+      decks.push(document.getElementById('quantum-scroll'));
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+
+      decks.forEach(deck => {
+        if (!deck) return;
+        // Calculate how "far" to scroll horizontally
+        // This is a simple ratio; tweak to your preference
+        const deckRect = deck.getBoundingClientRect();
+        // If the deck is visible on the screen, proceed
+        if (deckRect.top < window.innerHeight && deckRect.bottom > 0) {
+          // Adjust ratio or offset as needed
+          let offset = (scrollPos - deckRect.top) * 0.2;  
+          if (offset < 0) offset = 0;
+          deck.scrollLeft = offset;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
